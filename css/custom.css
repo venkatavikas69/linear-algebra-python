@@ -40,18 +40,20 @@ body {
   direction: ltr !important;
   text-align: left !important;
   font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  background: var(--bg) !important;
+  color: var(--text) !important;
 }
 
 .md-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem 3rem;
+  background: transparent;
 }
 
 .md-page {
   padding: 1.5rem 0 2rem;
+  background: transparent;
 }
 
 .md-main {
@@ -60,11 +62,13 @@ body {
 }
 
 .md-content {
-  padding: 0;
+  padding: 1rem 0 0;
+  background: transparent;
 }
 
 .md-typeset {
   text-align: left;
+  color: var(--text);
 }
 
 .md-typeset h1,
@@ -134,6 +138,12 @@ body {
 .md-header {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
+}
+
+.md-header-nav,
+.md-sidebar,
+.md-typeset {
+  color: var(--text);
 }
 
 .md-header-nav .md-nav__link {
