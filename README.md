@@ -68,6 +68,26 @@ Each script saves plots into its own `outputs/` directory.
 
 ---
 
+## 📚 Documentation
+
+This repository now includes an MkDocs site in the `docs/` folder.
+
+Build the documentation locally:
+
+```bash
+mkdocs build
+```
+
+Preview the site locally:
+
+```bash
+mkdocs serve
+```
+
+The GitHub Actions workflow in `.github/workflows/deploy-docs.yml` can publish the built site to GitHub Pages automatically.
+
+---
+
 ## 📦 Dependencies
 
 - `numpy`

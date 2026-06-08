@@ -1,0 +1,16 @@
+site_name: Linear Algebra Python
+site_description: Python practice for 3Blue1Brown-style linear algebra learning
+repo_name: venkatavikas69/linear-algebra-python
+repo_url: https://github.com/venkatavikas69/linear-algebra-python
+nav:
+  - Home: index.md
+  - Getting Started: getting_started.md
+  - Notes: notes.md
+  - Contributing: contributing.md
+theme:
+  name: readthedocs
+markdown_extensions:
+  - toc:
+      permalink: true
+  - footnotes
+  - tables
