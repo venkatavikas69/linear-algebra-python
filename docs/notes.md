@@ -1,11 +1,11 @@
 # Notes
 
-This repository includes learning notes and examples for each chapter of the linear algebra project.
+This documentation site now includes the chapter notes directly as site pages.
 
 ## Chapter notes
 
-- [Chapter 1 - Vectors](https://github.com/venkatavikas69/linear-algebra-python/blob/main/chapter1_notes.md)
-- [Chapter 2 - Linear Combinations](https://github.com/venkatavikas69/linear-algebra-python/blob/main/chapter2_span_basis_notes.md)
+- [Chapter 1 - Vectors](chapter1_notes.md)
+- [Chapter 2 - Linear Combinations & Basis](chapter2_span_basis_notes.md)
 
 ## Visualizations
 
