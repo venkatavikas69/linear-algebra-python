@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Chapter 1 - Vectors - Linear Algebra Python</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Chapter 1 - Vectors";
+        var mkdocs_page_input_path = "chapter1_notes.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Linear Algebra Python
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Notes</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../notes/">Overview</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Chapter 1 - Vectors</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-the-big-question-what-is-a-vector">1. The big question: what IS a vector?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-coordinates-how-arrows-become-numbers">2. Coordinates — how arrows become numbers</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-vector-addition-the-tip-to-tail-rule">3. Vector addition — the tip-to-tail rule</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-scalar-multiplication-stretching-flipping">4. Scalar multiplication — stretching &amp; flipping</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-vector-magnitude-length">5. Vector magnitude (length)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-why-this-matters-for-ai">6. Why this matters for AI</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#python-reference">Python Reference</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quick-check">Quick Check ✅</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-to-watch-next">What to watch next</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../chapter2_span_basis_notes/">Chapter 2 - Linear Combinations & Basis</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../contributing/">Contributing</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Linear Algebra Python</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Notes</li>
+      <li class="breadcrumb-item active">Chapter 1 - Vectors</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/venkatavikas69/linear-algebra-python/edit/master/docs/chapter1_notes.md">Edit on venkatavikas69/linear-algebra-python</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="chapter-1-vectors">Chapter 1 — Vectors<a class="headerlink" href="#chapter-1-vectors" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>3Blue1Brown · Essence of Linear Algebra</strong> · Study Notes</p>
+</blockquote>
+<hr />
+<h2 id="1-the-big-question-what-is-a-vector">1. The big question: what IS a vector?<a class="headerlink" href="#1-the-big-question-what-is-a-vector" title="Permanent link">&para;</a></h2>
+<p>Grant (3B1B) opens by pointing out that three very different communities use the word "vector" — and they're all right:</p>
+<table>
+<thead>
+<tr>
+<th>Community</th>
+<th>What a vector means to them</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Physics student</strong></td>
+<td>An arrow in space. It has a <strong>length</strong> (magnitude) and a <strong>direction</strong>. You can move it anywhere — what matters is where it points and how long it is.</td>
+</tr>
+<tr>
+<td><strong>CS student</strong></td>
+<td>An ordered list of numbers. Like <code>[3, -2]</code> or <code>[0.5, 1.2, 7.0]</code>. Just a structured container of values.</td>
+</tr>
+<tr>
+<td><strong>Mathematician</strong></td>
+<td>Any object where two operations make sense: <strong>adding</strong> two vectors, and <strong>scaling</strong> a vector by a number. Anything satisfying those rules is a vector.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>3B1B's key insight:</strong> For learning linear algebra, think of vectors as <em>arrows rooted at the origin</em>. The tip of the arrow lands at coordinates that match the list of numbers. Both views — arrow and list — describe the same thing.</p>
+</blockquote>
+<hr />
+<h2 id="2-coordinates-how-arrows-become-numbers">2. Coordinates — how arrows become numbers<a class="headerlink" href="#2-coordinates-how-arrows-become-numbers" title="Permanent link">&para;</a></h2>
+<p>In 2D, a vector <strong>[3, 2]</strong> means: start at the origin (0,0), walk <strong>3 units right</strong> along the x-axis, then <strong>2 units up</strong> along the y-axis. That's where the arrow tip lands.</p>
+<pre><code>y
+↑
+3 ──────────── ● ← tip of vector [3, 2]
+2         ↑
+1         │ 2 up (y component)
+0 ─────────────────→ x
+  0  1  2  3
+       └──────┘
+       3 right (x component)
+</code></pre>
+<blockquote>
+<p>💡 The <strong>first number</strong> always tells you movement along x (horizontal). The <strong>second number</strong> tells you movement along y (vertical). In 3D, a third number gives movement along z (depth).</p>
+</blockquote>
+<hr />
+<h2 id="3-vector-addition-the-tip-to-tail-rule">3. Vector addition — the tip-to-tail rule<a class="headerlink" href="#3-vector-addition-the-tip-to-tail-rule" title="Permanent link">&para;</a></h2>
+<p>To add two vectors, place the tail of the second vector at the tip of the first. The result (the <em>sum</em>) is the arrow from the original start to the final tip.</p>
+<p><strong>As numbers:</strong> just add element by element.</p>
+<pre><code>[1, 2] + [3, -1] = [1+3, 2+(-1)] = [4, 1]
+</code></pre>
+<p><strong>Visually:</strong> walk the first journey, then the second journey. The sum is where you end up.</p>
+<blockquote>
+<p>🧭 <strong>Real-world example:</strong> This is why GPS displacement works — drive 3 km north then 4 km east: your total displacement is one diagonal vector, not the winding path you traveled.</p>
+</blockquote>
+<hr />
+<h2 id="4-scalar-multiplication-stretching-flipping">4. Scalar multiplication — stretching &amp; flipping<a class="headerlink" href="#4-scalar-multiplication-stretching-flipping" title="Permanent link">&para;</a></h2>
+<p>Multiplying a vector by a plain number (a <em>scalar</em>) stretches, shrinks, or flips it. It never changes the direction — only the magnitude — unless the scalar is negative, in which case it reverses direction.</p>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>2 × [1, 2] = [2, 4]</code></td>
+<td>Stretched — arrow points same way, twice as long</td>
+</tr>
+<tr>
+<td><code>0.5 × [1, 2] = [0.5, 1]</code></td>
+<td>Shrunk — shorter, same direction</td>
+</tr>
+<tr>
+<td><code>-1 × [1, 2] = [-1, -2]</code></td>
+<td>Flipped — points exactly opposite direction</td>
+</tr>
+<tr>
+<td><code>0 × [1, 2] = [0, 0]</code></td>
+<td>Zero vector — no length, no direction</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ <strong>The word "scalar"</strong> comes from "scale" — it literally scales the vector. In ML/AI, when you normalize a vector you're multiplying by a scalar to make its length exactly 1. This is called a <em>unit vector</em>.</p>
+</blockquote>
+<hr />
+<h2 id="5-vector-magnitude-length">5. Vector magnitude (length)<a class="headerlink" href="#5-vector-magnitude-length" title="Permanent link">&para;</a></h2>
+<p>The magnitude (length) of a vector is calculated using the <strong>Pythagorean theorem</strong>:</p>
+<pre><code>||v|| = √(x² + y²)
+
+Example: v = [3, 4]
+||v|| = √(3² + 4²) = √(9 + 16) = √25 = 5
+</code></pre>
+<p>The arrow is the hypotenuse of a right triangle formed by the x and y components.</p>
+<p><strong>Normalizing a vector</strong> (making it length 1):</p>
+<pre><code>unit_v = v / ||v||
+
+Example: v = [3, 4],  ||v|| = 5
+unit_v = [3/5, 4/5] = [0.6, 0.8]
+||unit_v|| = 1.0  ← exactly 1
+</code></pre>
+<blockquote>
+<p>💡 In AI, embedding vectors are almost always normalized so that cosine similarity (measuring the angle between vectors) equals dot product similarity.</p>
+</blockquote>
+<hr />
+<h2 id="6-why-this-matters-for-ai">6. Why this matters for AI<a class="headerlink" href="#6-why-this-matters-for-ai" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>🤖 Remember vector databases? Words like "cat" and "kitten" are placed close together in a high-dimensional space. <em>That's</em> a vector — a list of numbers. Adding and scaling those vectors is literally what neural networks do millions of times per second. Every weight update in training is scalar multiplication + vector addition.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>In AI</th>
+<th>How vectors appear</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Word embeddings</strong></td>
+<td><code>"king" − "man" + "woman" ≈ "queen"</code> — this is just vector addition and subtraction on word vectors</td>
+</tr>
+<tr>
+<td><strong>Neural networks</strong></td>
+<td>Each layer transforms a vector using matrix multiplication (which is built from dot products of vectors)</td>
+</tr>
+<tr>
+<td><strong>Cosine similarity</strong></td>
+<td>Measures the angle between two vectors — used to find "similar" items in a vector database</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🧠 The coordinates of a vector are the instructions for how much of each basis direction to use.</p>
+</blockquote>
+<hr />
+<h2 id="python-reference">Python Reference<a class="headerlink" href="#python-reference" title="Permanent link">&para;</a></h2>
+<pre><code class="language-python">import numpy as np
+
+# Creating vectors
+v = np.array([3, 2])       # 2D vector
+w = np.array([1, -3, 2])   # 3D vector
+
+# Vector addition
+a = np.array([1, 2])
+b = np.array([3, -1])
+result = a + b              # [4, 1]
+
+# Scalar multiplication
+scaled = 2 * v              # [6, 4]
+flipped = -1 * v            # [-3, -2]
+
+# Magnitude (length)
+magnitude = np.linalg.norm(v)   # √(3² + 2²) = 3.606
+
+# Normalize (unit vector)
+unit_v = v / np.linalg.norm(v)  # length becomes exactly 1.0
+
+# Word vector analogy (simplified)
+king   = np.array([0.9, 0.8])
+man    = np.array([0.7, 0.2])
+woman  = np.array([0.6, 0.3])
+queen  = king - man + woman     # ≈ [0.8, 0.9]
+</code></pre>
+<hr />
+<h2 id="quick-check">Quick Check ✅<a class="headerlink" href="#quick-check" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What is <code>[2, 5] + [-1, 3]</code>?</td>
+<td><code>[1, 8]</code> — add element-by-element: (2−1=1, 5+3=8)</td>
+</tr>
+<tr>
+<td>What does scaling a vector by 0 give you?</td>
+<td>The zero vector <code>[0, 0]</code> — a point at the origin with no length and no direction</td>
+</tr>
+<tr>
+<td>A vector <code>[0, 5]</code> points in which direction?</td>
+<td>Straight up (along the positive y-axis). No horizontal component at all</td>
+</tr>
+<tr>
+<td>What's the difference between a vector and a scalar?</td>
+<td>A <em>scalar</em> is just a single number (like 3 or −0.5). A <em>vector</em> is an ordered list of numbers with a direction and magnitude</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="what-to-watch-next">What to watch next<a class="headerlink" href="#what-to-watch-next" title="Permanent link">&para;</a></h2>
+<p><strong>Chapter 2 — Linear combinations, span, and basis vectors.</strong>
+After that, Chapter 3 (matrices) is where things get exciting — you'll see how matrices are just bundles of vectors that transform space.</p>
+<hr />
+<p><em>Notes by following the <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">3Blue1Brown Essence of Linear Algebra</a> series.</em></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../notes/" class="btn btn-neutral float-left" title="Overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../chapter2_span_basis_notes/" class="btn btn-neutral float-right" title="Chapter 2 - Linear Combinations & Basis">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/venkatavikas69/linear-algebra-python" class="fa fa-code-fork" style="color: #fcfcfc"> venkatavikas69/linear-algebra-python</a>
+        </span>
+    
+    
+      <span><a href="../notes/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../chapter2_span_basis_notes/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
