@@ -93,7 +93,12 @@ body {
 
 .wy-menu-vertical li:hover,
 .wy-menu-horiz li:hover {
-  background: rgba(79, 70, 229, 0.08) !important;
+  background: rgba(79, 70, 229, 0.12) !important;
+}
+
+.wy-menu-vertical li:hover > a,
+.wy-menu-horiz li:hover > a {
+  color: var(--primary) !important;
 }
 
 .wy-menu-vertical a,
@@ -268,6 +273,18 @@ footer a {
 }
 
 @media screen and (max-width: 980px) {
+  .wy-nav-side {
+    position: relative !important;
+    width: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+    z-index: 500 !important;
+  }
+
+  .wy-nav-content-wrap {
+    margin-left: 0 !important;
+  }
+
   .wy-nav-content {
     padding: 1.5rem 1rem 2rem !important;
   }
@@ -281,10 +298,32 @@ footer a {
   .wy-nav-side {
     width: 100% !important;
     border-right: none !important;
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+  }
+
+  .wy-nav-content-wrap {
+    margin-left: 0 !important;
   }
 
   .wy-nav-content {
     padding: 1rem 0.75rem 1.5rem !important;
+  }
+
+  .wy-menu-vertical,
+  .wy-side-scroll {
+    width: 100% !important;
+  }
+
+  .wy-side-scroll {
+    padding-top: 0.75rem;
+  }
+
+  .wy-nav-top {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 600 !important;
   }
 
   .rst-content {
