@@ -12,6 +12,16 @@ nav:
   - Contributing: contributing.md
 theme:
   name: readthedocs
+  palette:
+    scheme: default
+    primary: indigo
+    accent: blue
+  font:
+    text: 'Inter, Arial, sans-serif'
+    code: 'Fira Code, monospace'
+  logo: 'images/logo.svg'
+extra_css:
+  - css/custom.css
 markdown_extensions:
   - toc:
       permalink: true

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Chapter 2 - Linear Combinations & Basis - Linear Algebra Python</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/custom.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Chapter 2 - Linear Combinations \u0026 Basis";
+        var mkdocs_page_input_path = "chapter2_span_basis_notes.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../images/logo.svg" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Notes</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../notes/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../chapter1_notes/">Chapter 1 - Vectors</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Chapter 2 - Linear Combinations & Basis</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-the-two-special-vectors-i-and-j-i-hat-and-j-hat">1. The two special vectors: î and ĵ (i-hat and j-hat)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-linear-combinations-the-core-operation">2. Linear combinations — the core operation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-span-how-much-of-space-can-you-reach">3. Span — "how much of space can you reach?"</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#case-1-two-independent-vectors-span-entire-2d-plane">Case 1: Two independent vectors → Span = entire 2D plane ✓</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#case-2-parallel-dependent-vectors-span-one-line-only">Case 2: Parallel (dependent) vectors → Span = one line only</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#case-3-zero-vector-span-just-the-origin">Case 3: Zero vector → Span = just the origin</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-linear-independence-vs-dependence">4. Linear independence vs dependence</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#linearly-independent">Linearly INDEPENDENT ✓</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#linearly-dependent">Linearly DEPENDENT ✗</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#detecting-dependence-mathematically-the-determinant">Detecting dependence mathematically — the determinant</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-basis-the-minimal-complete-set">5. Basis — the minimal complete set</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-coordinates-depend-on-your-choice-of-basis">6. Coordinates depend on your choice of basis</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-extending-to-3d">7. Extending to 3D</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-why-this-chapter-matters-for-ai">8. Why this chapter matters for AI</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#python-reference">Python Reference</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#quick-check">Quick Check ✅</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-to-watch-next">What to watch next</a>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../contributing/">Contributing</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Linear Algebra Python</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Notes</li>
+      <li class="breadcrumb-item active">Chapter 2 - Linear Combinations & Basis</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/venkatavikas69/linear-algebra-python/edit/master/docs/chapter2_span_basis_notes.md">Edit on venkatavikas69/linear-algebra-python</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="chapter-2-linear-combinations-span-basis-vectors">Chapter 2 — Linear Combinations, Span &amp; Basis Vectors<a class="headerlink" href="#chapter-2-linear-combinations-span-basis-vectors" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>3Blue1Brown · Essence of Linear Algebra</strong> · Study Notes</p>
+</blockquote>
+<hr />
+<h2 id="1-the-two-special-vectors-i-and-j-i-hat-and-j-hat">1. The two special vectors: î and ĵ (i-hat and j-hat)<a class="headerlink" href="#1-the-two-special-vectors-i-and-j-i-hat-and-j-hat" title="Permanent link">&para;</a></h2>
+<p>Grant starts by introducing the two most important vectors in all of 2D linear algebra — the <strong>basis vectors</strong> of the standard coordinate system:</p>
+<table>
+<thead>
+<tr>
+<th>Vector</th>
+<th>Notation</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>i-hat</strong></td>
+<td>î</td>
+<td><code>[1, 0]</code></td>
+<td>One unit to the right, zero up. Defines "one step in the x direction."</td>
+</tr>
+<tr>
+<td><strong>j-hat</strong></td>
+<td>ĵ</td>
+<td><code>[0, 1]</code></td>
+<td>Zero right, one unit up. Defines "one step in the y direction."</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>Key insight:</strong> Every vector <code>[x, y]</code> is secretly just:</p>
+<p><code>[3, 2]  =  3·î + 2·ĵ
+         =  3·[1,0] + 2·[0,1]
+         =  [3,0] + [0,2]
+         =  [3,2]  ✓</code></p>
+<p>The coordinates are <em>instructions</em>: "scale î by this, scale ĵ by that, then add them."</p>
+</blockquote>
+<hr />
+<h2 id="2-linear-combinations-the-core-operation">2. Linear combinations — the core operation<a class="headerlink" href="#2-linear-combinations-the-core-operation" title="Permanent link">&para;</a></h2>
+<p>A <strong>linear combination</strong> of two vectors <strong>v</strong> and <strong>w</strong> is any vector you can make using only scaling and adding:</p>
+<pre><code>a·v + b·w     where a and b are any scalars (any real numbers)
+</code></pre>
+<p><strong>Example:</strong></p>
+<pre><code>v = [1, 2],  w = [3, 0]
+
+2·v + (-1)·w  =  2·[1,2] + (-1)·[3,0]
+               =  [2, 4] + [-3, 0]
+               =  [-1, 4]
+</code></pre>
+<p>The word <strong>"linear"</strong> means you're only allowed to <strong>scale</strong> (multiply by a number) and <strong>add</strong>. No squaring, no square roots, no trig — just those two operations.</p>
+<blockquote>
+<p>🎚️ Think of <code>a</code> and <code>b</code> as two dials. As you turn the dials to different values, the tip of the resulting vector <code>a·v + b·w</code> sweeps through space. The question is: <em>which points in space can the tip reach?</em> That's the <strong>span</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="3-span-how-much-of-space-can-you-reach">3. Span — "how much of space can you reach?"<a class="headerlink" href="#3-span-how-much-of-space-can-you-reach" title="Permanent link">&para;</a></h2>
+<p>The <strong>span</strong> of a set of vectors is the collection of <strong>all vectors reachable</strong> by linear combinations of those vectors. It answers: "if these are the only building blocks I have, what can I build?"</p>
+<h3 id="case-1-two-independent-vectors-span-entire-2d-plane">Case 1: Two independent vectors → Span = entire 2D plane ✓<a class="headerlink" href="#case-1-two-independent-vectors-span-entire-2d-plane" title="Permanent link">&para;</a></h3>
+<pre><code>v = [2, 1],  w = [0.5, 2]   ← point in different directions
+</code></pre>
+<p>By varying <code>a</code> and <code>b</code> across all real numbers, the tip of <code>a·v + b·w</code> can reach <strong>every single point</strong> in the 2D plane. These two vectors together span all of 2D space.</p>
+<h3 id="case-2-parallel-dependent-vectors-span-one-line-only">Case 2: Parallel (dependent) vectors → Span = one line only<a class="headerlink" href="#case-2-parallel-dependent-vectors-span-one-line-only" title="Permanent link">&para;</a></h3>
+<pre><code>v = [2, 1],  w = [4, 2]   ← w is just 2×v
+</code></pre>
+<p>Since <code>w = 2·v</code>, any combination <code>a·v + b·w = a·v + b·(2v) = (a + 2b)·v</code>. You can never escape the single line through the origin that <code>v</code> points along. The second vector adds <strong>nothing new</strong>.</p>
+<h3 id="case-3-zero-vector-span-just-the-origin">Case 3: Zero vector → Span = just the origin<a class="headerlink" href="#case-3-zero-vector-span-just-the-origin" title="Permanent link">&para;</a></h3>
+<pre><code>a·[0, 0] = [0, 0]   no matter what a is
+</code></pre>
+<p>Scaling zero always gives zero. The span of the zero vector is a single point — the origin.</p>
+<hr />
+<h2 id="4-linear-independence-vs-dependence">4. Linear independence vs dependence<a class="headerlink" href="#4-linear-independence-vs-dependence" title="Permanent link">&para;</a></h2>
+<p>This is one of the most important concepts in all of linear algebra:</p>
+<h3 id="linearly-independent">Linearly INDEPENDENT ✓<a class="headerlink" href="#linearly-independent" title="Permanent link">&para;</a></h3>
+<p>Each vector adds a genuinely <strong>new direction</strong> to the span. No vector in the set can be made from linear combinations of the others.</p>
+<pre><code>[1, 0]  and  [0, 1]
+</code></pre>
+<p>One goes right, one goes up. Neither can produce the other. → <strong>Independent</strong></p>
+<h3 id="linearly-dependent">Linearly DEPENDENT ✗<a class="headerlink" href="#linearly-dependent" title="Permanent link">&para;</a></h3>
+<p>At least one vector is <strong>redundant</strong> — it's already reachable from the others. Adding it to the set doesn't expand the span.</p>
+<pre><code>[1, 2]  and  [2, 4]   ← [2,4] = 2 × [1,2]
+</code></pre>
+<p>The second is just a scaled copy of the first. → <strong>Dependent</strong></p>
+<blockquote>
+<p>🔑 <strong>Test for linear dependence:</strong> Can you write one vector as a linear combination of the others? If yes → dependent.
+For two vectors in 2D, the easy visual check: do they lie on the same line through the origin?</p>
+</blockquote>
+<h3 id="detecting-dependence-mathematically-the-determinant">Detecting dependence mathematically — the determinant<a class="headerlink" href="#detecting-dependence-mathematically-the-determinant" title="Permanent link">&para;</a></h3>
+<p>Place the two vectors as columns of a 2×2 matrix and compute the <strong>determinant</strong>:</p>
+<pre><code>v = [2, 1],  w = [0.5, 2]
+
+Matrix = | 2    0.5 |
+         | 1    2   |
+
+det = (2×2) - (0.5×1) = 4 - 0.5 = 3.5  ≠ 0  →  Independent ✓
+</code></pre>
+<pre><code>v = [2, 1],  w = [4, 2]
+
+Matrix = | 2    4 |
+         | 1    2 |
+
+det = (2×2) - (4×1) = 4 - 4 = 0  →  Dependent ✗
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Determinant</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>det ≠ 0</code></td>
+<td>Vectors are <strong>independent</strong> → span = full plane</td>
+</tr>
+<tr>
+<td><code>det = 0</code></td>
+<td>Vectors are <strong>dependent</strong> → span = just a line</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠️ We'll explore determinants fully in Chapter 5 — for now, just know det = 0 is the mathematical fingerprint of "these vectors carry no area between them."</p>
+</blockquote>
+<hr />
+<h2 id="5-basis-the-minimal-complete-set">5. Basis — the minimal complete set<a class="headerlink" href="#5-basis-the-minimal-complete-set" title="Permanent link">&para;</a></h2>
+<p>A <strong>basis</strong> of a vector space is a set of vectors that satisfies two conditions simultaneously:</p>
+<table>
+<thead>
+<tr>
+<th>Condition</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Linearly independent</strong></td>
+<td>No redundancy — every vector earns its place by contributing a new direction</td>
+</tr>
+<tr>
+<td><strong>2. Spans the space</strong></td>
+<td>Using linear combinations of the basis, you can reach every point in the space</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The standard basis of 2D space:</strong></p>
+<pre><code>î = [1, 0]   and   ĵ = [0, 1]
+</code></pre>
+<p>These two vectors are independent (different directions) and their span covers the entire 2D plane.</p>
+<blockquote>
+<p>⚠️ The standard basis is <strong>not</strong> the only valid basis. Any two non-parallel vectors work. For example, <code>[3, 1]</code> and <code>[1, 3]</code> are also a valid basis for 2D space — they're independent and together span the whole plane.</p>
+<p>🧱 Basis vectors are the <strong>atoms</strong> of a vector space. Every other vector is a unique "recipe" — a specific linear combination of the basis vectors. The coordinates <code>[3, 2]</code> are just the recipe: "3 of î, 2 of ĵ."</p>
+</blockquote>
+<hr />
+<h2 id="6-coordinates-depend-on-your-choice-of-basis">6. Coordinates depend on your choice of basis<a class="headerlink" href="#6-coordinates-depend-on-your-choice-of-basis" title="Permanent link">&para;</a></h2>
+<p>The same point in space has <strong>different coordinates</strong> depending on which basis you use:</p>
+<p><strong>Standard basis</strong> → coordinates <code>[4, 3]</code></p>
+<pre><code>4·[1,0] + 3·[0,1] = [4, 3]
+</code></pre>
+<p><strong>Custom basis</strong> <code>b₁ = [2, 1]</code>, <code>b₂ = [-1, 2]</code> → coordinates <code>[2.2, 0.4]</code></p>
+<pre><code>2.2·[2,1] + 0.4·[-1,2] = [4.4, 2.2] + [-0.4, 0.8] = [4.0, 3.0]  ✓ same point
+</code></pre>
+<blockquote>
+<p>💡 This is why changing the basis is such a powerful technique in ML — the same data can be represented in a new coordinate system where patterns become clearer (like PCA).</p>
+</blockquote>
+<hr />
+<h2 id="7-extending-to-3d">7. Extending to 3D<a class="headerlink" href="#7-extending-to-3d" title="Permanent link">&para;</a></h2>
+<p>In 3D, the standard basis has three vectors:</p>
+<pre><code>î = [1, 0, 0]   ← x direction
+ĵ = [0, 1, 0]   ← y direction
+k̂ = [0, 0, 1]   ← z direction
+</code></pre>
+<p>Three independent vectors in 3D → span = all of 3D space.</p>
+<p><strong>The rank rule:</strong></p>
+<pre><code>rank = 1  →  span is a line
+rank = 2  →  span is a plane
+rank = 3  →  span is all of 3D space
+</code></pre>
+<p>Where <strong>rank</strong> = the number of truly independent directions in your set of vectors.</p>
+<hr />
+<h2 id="8-why-this-chapter-matters-for-ai">8. Why this chapter matters for AI<a class="headerlink" href="#8-why-this-chapter-matters-for-ai" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>How it appears in AI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Basis</strong></td>
+<td>A 768-dim embedding space (like BERT) has a basis of 768 vectors. Every word embedding is a linear combination of those directions.</td>
+</tr>
+<tr>
+<td><strong>Linear combination</strong></td>
+<td>A neural network's linear layer computes exactly this: <code>a·v₁ + b·v₂ + c·v₃ + ...</code> with learned weights <code>a, b, c</code>.</td>
+</tr>
+<tr>
+<td><strong>Span</strong></td>
+<td>The span of a neural layer's weight vectors determines which outputs the layer <em>can possibly</em> produce. A bottleneck layer with fewer neurons has a smaller span.</td>
+</tr>
+<tr>
+<td><strong>Linear independence</strong></td>
+<td>Correlated (linearly dependent) features in ML carry redundant information. This is why feature correlation is a problem — dependent features don't expand the "span" of information.</td>
+</tr>
+<tr>
+<td><strong>Change of basis</strong></td>
+<td>PCA finds a new basis where the first basis vector points in the direction of maximum variation in your data. Dimensionality reduction = dropping low-variance basis directions.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🤖 The famous word vector analogy from Chapter 1:
+<code>"king" - "man" + "woman" ≈ "queen"</code>
+is just <strong>vector addition and subtraction</strong> — moving along different basis directions in embedding space. You now understand the full machinery behind this.</p>
+</blockquote>
+<hr />
+<h2 id="python-reference">Python Reference<a class="headerlink" href="#python-reference" title="Permanent link">&para;</a></h2>
+<pre><code class="language-python">import numpy as np
+
+# Standard basis vectors
+i_hat = np.array([1, 0])
+j_hat = np.array([0, 1])
+
+# Any vector as a linear combination of basis vectors
+v = np.array([3, 2])
+reconstructed = 3 * i_hat + 2 * j_hat   # → [3, 2]  ✓
+
+# Linear combination
+v = np.array([1, 2])
+w = np.array([3, 0])
+result = 2 * v + (-1) * w               # → [-1, 4]
+
+# Check linear independence using the determinant
+v = np.array([2, 1])
+w = np.array([0.5, 2])
+M = np.column_stack([v, w])             # put vectors as columns
+det = np.linalg.det(M)                  # 3.5 → independent
+# det ≠ 0 → independent  |  det = 0 → dependent
+
+# Check using rank (works for any number of vectors in any dimension)
+M = np.row_stack([v, w])
+rank = np.linalg.matrix_rank(M)         # 2 → full rank → independent
+
+# Change of basis: find coordinates of a point in a custom basis
+b1 = np.array([2, 1])
+b2 = np.array([-1, 2])
+point = np.array([4, 3])
+B = np.column_stack([b1, b2])
+coords_in_custom = np.linalg.solve(B, point)  # → [2.2, 0.4]
+</code></pre>
+<hr />
+<h2 id="quick-check">Quick Check ✅<a class="headerlink" href="#quick-check" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What is the span of vectors <code>[1,0]</code> and <code>[0,1]</code>?</td>
+<td>The entire 2D plane — these are î and ĵ, the standard basis. Their linear combinations can reach any point <code>[x, y]</code>.</td>
+</tr>
+<tr>
+<td>Are <code>[2, 4]</code> and <code>[1, 2]</code> linearly independent?</td>
+<td>No — they're linearly dependent. <code>[2,4] = 2 × [1,2]</code>. They point in the same direction. Their span is just one line, not the whole plane.</td>
+</tr>
+<tr>
+<td>How many vectors do you need to form a basis for 3D space?</td>
+<td>Exactly 3 — one for each dimension. They must be independent and together span all of 3D space.</td>
+</tr>
+<tr>
+<td>Can <code>[3, 1]</code> and <code>[1, 3]</code> form a basis for 2D space?</td>
+<td>Yes — they point in different directions (not parallel), so they're independent and span the whole plane.</td>
+</tr>
+<tr>
+<td>What is <code>2·[1,2] + (−1)·[3,0]</code>?</td>
+<td><code>[2,4] + [−3,0] = [−1, 4]</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="what-to-watch-next">What to watch next<a class="headerlink" href="#what-to-watch-next" title="Permanent link">&para;</a></h2>
+<p><strong>Chapter 3 — Linear transformations and matrices.</strong>
+This is the payoff chapter — you'll see how matrices are just a compact way to describe how basis vectors move when space is transformed. Every rotation, scaling, and shear is a matrix. Neural network layers are matrices.</p>
+<hr />
+<p><em>Notes by following the <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">3Blue1Brown Essence of Linear Algebra</a> series.</em></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../chapter1_notes/" class="btn btn-neutral float-left" title="Chapter 1 - Vectors"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../contributing/" class="btn btn-neutral float-right" title="Contributing">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/venkatavikas69/linear-algebra-python" class="fa fa-code-fork" style="color: #fcfcfc"> venkatavikas69/linear-algebra-python</a>
+        </span>
+    
+    
+      <span><a href="../chapter1_notes/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../contributing/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
