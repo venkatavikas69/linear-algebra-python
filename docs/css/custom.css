@@ -19,20 +19,20 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    color-scheme: dark;
-    --bg: #0f172a;
-    --surface: #111827;
-    --surface-strong: #1f2937;
-    --text: #e2e8f0;
-    --muted: #94a3b8;
-    --border: #334155;
-    --primary: #818cf8;
-    --accent: #38bdf8;
-    --code-bg: #1e293b;
-    --pre-bg: #020617;
-    --pre-text: #e2e8f0;
-    --blockquote-bg: #172554;
-    --blockquote-border: #60a5fa;
+    color-scheme: light;
+    --bg: #f7f8fb;
+    --surface: #ffffff;
+    --surface-strong: #f8fafc;
+    --text: #111827;
+    --muted: #475569;
+    --border: #e5e7eb;
+    --primary: #4f46e5;
+    --accent: #2563eb;
+    --code-bg: #f3f4f6;
+    --pre-bg: #111827;
+    --pre-text: #f8fafc;
+    --blockquote-bg: #eef4ff;
+    --blockquote-border: #3b82f6;
   }
 }
 
@@ -45,6 +45,8 @@ body {
   color: var(--text) !important;
   font-family: 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif;
   text-align: left;
+  color-scheme: light !important;
+  forced-color-adjust: none !important;
 }
 
 .wy-body-for-nav {
@@ -118,6 +120,19 @@ body {
 .wy-nav-top {
   background: var(--surface) !important;
   border-bottom: 1px solid var(--border) !important;
+}
+
+.wy-nav-content-wrap,
+.wy-nav-side,
+.wy-nav-content,
+.wy-body-for-nav,
+.wy-menu-vertical,
+.wy-menu-horiz,
+.wy-side-nav-search,
+footer {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  border-color: var(--border) !important;
 }
 
 .wy-nav-content-wrap {
