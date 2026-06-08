@@ -13,7 +13,7 @@ Following the 3Blue1Brown Essence of Linear Algebra series.
 ### Notes
 
 - [Chapter 1 - Vectors](/chapter1_notes.md)
-- [Chapter 2 - Linear Combinations](code/chapter2/ch2_notes_infographic.png)
+- [Chapter 2 - Linear Combinations](/chapter2_span_basis_notes.md)
 
 ### Code
 - [vectors.py](code/chapter1/chapter1_vectors.py)
