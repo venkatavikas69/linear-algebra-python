@@ -9,6 +9,7 @@ nav:
       - Overview: notes.md
       - Chapter 1 - Vectors: chapter1_notes.md
       - Chapter 2 - Linear Combinations & Basis: chapter2_span_basis_notes.md
+      - Chapter 3 - Linear Transformations: chapter3_linear_transformations_notes.md
   - Contributing: contributing.md
 theme:
   name: readthedocs
