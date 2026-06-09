@@ -125,6 +125,15 @@ body {
 .wy-nav-top {
   background: var(--surface) !important;
   border-bottom: 1px solid var(--border) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+}
+
+.wy-nav-top .fa {
+  color: var(--text) !important;
+  font-size: 1.5rem !important;
+  cursor: pointer !important;
 }
 
 .wy-nav-content-wrap,

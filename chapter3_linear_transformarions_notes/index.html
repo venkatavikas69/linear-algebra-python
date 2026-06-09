@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Chapter 3 — Linear Transformations &amp; Matrices - Linear Algebra Python</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../css/custom.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Chapter 3 \u2014 Linear Transformations \u0026amp; Matrices";
+        var mkdocs_page_input_path = "chapter3_linear_transformarions_notes.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="..">
+          <img src="../images/logo.svg" class="logo" alt="Logo"/>
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting_started/">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Notes</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../notes/">Overview</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../chapter1_notes/">Chapter 1 - Vectors</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../chapter2_span_basis_notes/">Chapter 2 - Linear Combinations & Basis</a>
+                  </li>
+                  <li class="toctree-l1"><a class="" href="../chapter3_linear_transformations_notes.md">Chapter 3 - Linear Transformations</a>
+                  </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../contributing/">Contributing</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Linear Algebra Python</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Chapter 3 — Linear Transformations &amp; Matrices</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/venkatavikas69/linear-algebra-python/edit/master/docs/chapter3_linear_transformarions_notes.md">Edit on venkatavikas69/linear-algebra-python</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="chapter-3-linear-transformations-matrices">Chapter 3 — Linear Transformations &amp; Matrices<a class="headerlink" href="#chapter-3-linear-transformations-matrices" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>3Blue1Brown · Essence of Linear Algebra</strong> · Study Notes</p>
+</blockquote>
+<hr />
+<h2 id="1-what-is-a-linear-transformation">1. What is a linear transformation?<a class="headerlink" href="#1-what-is-a-linear-transformation" title="Permanent link">&para;</a></h2>
+<p>A <strong>transformation</strong> is a function — it takes a vector in, and spits a vector out. But "linear" transformations have two special geometric properties:</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Lines stay lines</strong></td>
+<td>All straight lines must remain straight after the transformation. No curving, no bending.</td>
+</tr>
+<tr>
+<td><strong>2. Origin stays fixed</strong></td>
+<td>The origin (0, 0) must not move. The transformation can squeeze, stretch, and rotate — but (0,0) is always anchored.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>Grant's visual intuition:</strong> Imagine the entire 2D plane printed on a rubber sheet. A linear transformation is what happens when you grab that sheet and pull it — but you must keep grid lines parallel, evenly spaced, and the origin pinned. Rotations, reflections, and shears are all allowed. Folding or curving is not.</p>
+</blockquote>
+<p>These two geometric rules translate directly into two algebraic properties:</p>
+<pre><code>Additivity:    T(v + w)  =  T(v) + T(w)
+Scaling:       T(a · v)  =  a · T(v)
+</code></pre>
+<blockquote>
+<p>⚠️ <strong>Non-linear examples</strong> (these violate the rules):
+- Shift: <code>T(v) = v + [2, 1]</code> — moves the origin ✗
+- Squaring: <code>T([x,y]) = [x², y²]</code> — curves straight lines ✗</p>
+</blockquote>
+<hr />
+<h2 id="2-the-key-insight-track-only-i-and-j">2. The key insight — track only î and ĵ<a class="headerlink" href="#2-the-key-insight-track-only-i-and-j" title="Permanent link">&para;</a></h2>
+<p>This is the <strong>central idea</strong> of the entire chapter:</p>
+<blockquote>
+<p>Because every vector is a linear combination of î and ĵ, you only need to know where the transformation sends <strong>î and ĵ</strong> to know where it sends <em>every single vector</em>.</p>
+</blockquote>
+<p>If a transformation moves î to some new vector <strong>â</strong> and ĵ to some new vector <strong>b̂</strong>, then any vector <code>[x, y]</code> lands at:</p>
+<pre><code>Transformed([x, y])  =  x · â  +  y · b̂
+</code></pre>
+<blockquote>
+<p>🔑 The entire transformation is completely described by just two vectors — the new locations of î and ĵ. <strong>That's all a matrix is.</strong></p>
+</blockquote>
+<hr />
+<h2 id="3-matrices-a-compact-way-to-store-a-transformation">3. Matrices — a compact way to store a transformation<a class="headerlink" href="#3-matrices-a-compact-way-to-store-a-transformation" title="Permanent link">&para;</a></h2>
+<p>A 2×2 matrix is simply a way to package the two destination vectors (where î and ĵ land) into a compact grid:</p>
+<pre><code>Matrix M = | a  c |     Column 1 = where î = [1,0] lands → [a, b]
+           | b  d |     Column 2 = where ĵ = [0,1] lands → [c, d]
+</code></pre>
+<blockquote>
+<p>⚠️ The <strong>first column</strong> is where î lands. The <strong>second column</strong> is where ĵ lands. <strong>Columns = destinations of basis vectors.</strong></p>
+</blockquote>
+<h3 id="matrix-vector-multiplication">Matrix-vector multiplication<a class="headerlink" href="#matrix-vector-multiplication" title="Permanent link">&para;</a></h3>
+<p>Applying the transformation to a vector <code>[x, y]</code>:</p>
+<pre><code>| a  c |   | x |         | a |         | c |     | ax + cy |
+| b  d | · | y |  =  x · | b |  +  y · | d |  =  | bx + dy |
+</code></pre>
+<p>This is <strong>not</strong> a formula to memorize — it's the geometric idea: <em>"scale the new î by x, scale the new ĵ by y, then add."</em></p>
+<p><strong>Step-by-step example:</strong></p>
+<pre><code>M = | 1  3 |    v = | 4 |
+    |-2  0 |        | 3 |
+
+= 4 · [1,-2]  +  3 · [3,0]
+= [4,-8]  +  [9,0]
+= [13, -8]
+</code></pre>
+<hr />
+<h2 id="4-common-transformations-as-matrices">4. Common transformations as matrices<a class="headerlink" href="#4-common-transformations-as-matrices" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Transformation</th>
+<th>Matrix</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Identity</strong></td>
+<td><code>[[1,0],[0,1]]</code></td>
+<td>Nothing moves. î stays, ĵ stays.</td>
+</tr>
+<tr>
+<td><strong>Rotate 90° CCW</strong></td>
+<td><code>[[0,-1],[1,0]]</code></td>
+<td>î→[0,1], ĵ→[−1,0]. x-axis becomes y-axis.</td>
+</tr>
+<tr>
+<td><strong>Shear</strong></td>
+<td><code>[[1,1],[0,1]]</code></td>
+<td>î stays, ĵ→[1,1]. Like leaning a stack of cards.</td>
+</tr>
+<tr>
+<td><strong>Scale ×2</strong></td>
+<td><code>[[2,0],[0,2]]</code></td>
+<td>Every vector doubles in length.</td>
+</tr>
+<tr>
+<td><strong>Reflect x-axis</strong></td>
+<td><code>[[1,0],[0,-1]]</code></td>
+<td>î stays, ĵ flips. y-coords get negated.</td>
+</tr>
+<tr>
+<td><strong>Squish to line</strong></td>
+<td><code>[[1,1],[0,0]]</code></td>
+<td>Entire plane collapses onto a single line. det = 0.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rotation-matrix-any-angle">Rotation matrix (any angle)<a class="headerlink" href="#rotation-matrix-any-angle" title="Permanent link">&para;</a></h3>
+<pre><code>M_rotate(θ) = | cos(θ)  -sin(θ) |
+              | sin(θ)   cos(θ) |
+
+Example — 90° (θ = π/2):
+  cos(90°) = 0,  sin(90°) = 1
+
+M = |  0  -1 |
+    |  1   0 |
+</code></pre>
+<hr />
+<h2 id="5-effect-of-a-transformation-on-shapes">5. Effect of a transformation on shapes<a class="headerlink" href="#5-effect-of-a-transformation-on-shapes" title="Permanent link">&para;</a></h2>
+<p>A shear transforms a unit square into a <strong>parallelogram</strong>:</p>
+<pre><code>Before (unit square):    After shear M=[[1,1],[0,1]]:
+
+    (0,1)──(1,1)             (1,2)──(2,2)
+      |      |        →       /      /
+    (0,0)──(1,0)           (0,0)──(1,0)
+</code></pre>
+<ul>
+<li>The bottom edge (along x-axis) stays fixed — î doesn't move</li>
+<li>The top edge gets pushed right — ĵ moves to [1,1]</li>
+<li>Area is preserved in a shear (det = 1)</li>
+</ul>
+<hr />
+<h2 id="6-why-this-chapter-matters-for-ai">6. Why this chapter matters for AI<a class="headerlink" href="#6-why-this-chapter-matters-for-ai" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>How it appears in AI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Matrix multiplication</strong></td>
+<td>Every "Dense" or "Linear" layer in a neural network is <code>output = W · input</code>. The weight matrix W is a learned linear transformation.</td>
+</tr>
+<tr>
+<td><strong>Transformer attention</strong></td>
+<td>The Q, K, V matrices in self-attention are three different linear transformations of the same input embedding — projecting it into different spaces.</td>
+</tr>
+<tr>
+<td><strong>PCA</strong></td>
+<td>Finds a rotation matrix that transforms data into a basis aligned with directions of maximum variance. Dimensionality reduction = dropping low-variance directions.</td>
+</tr>
+<tr>
+<td><strong>Stacking layers</strong></td>
+<td><code>W3 · (W2 · (W1 · input))</code> — three linear transformations applied in sequence. Chapter 4 shows this equals one big matrix multiplication.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>🤖 When a neural network "learns", it adjusts the numbers inside its weight matrices — tuning the linear transformations of space to map inputs to correct outputs. Understanding matrices as <strong>geometric transformations</strong> is the intuition behind why deep learning works.</p>
+</blockquote>
+<h3 id="neural-network-linear-layer">Neural network linear layer<a class="headerlink" href="#neural-network-linear-layer" title="Permanent link">&para;</a></h3>
+<pre><code class="language-python"># A single linear layer in a neural network:
+output = W @ input + b
+
+# W = weight matrix  → the linear transformation
+# b = bias vector    → a translation (added AFTER the linear part)
+# input              → the input vector (e.g. a word embedding)
+# output             → transformed vector passed to the next layer
+
+# Example: transforming a 4-dim embedding to 3-dim
+W = np.random.randn(3, 4)   # 3×4 weight matrix
+b = np.random.randn(3)       # 3-dim bias
+x = np.array([0.5, -1.2, 0.8, 0.3])   # 4-dim input
+
+output = W @ x + b           # → 3-dim output
+</code></pre>
+<hr />
+<h2 id="python-reference">Python Reference<a class="headerlink" href="#python-reference" title="Permanent link">&para;</a></h2>
+<pre><code class="language-python">import numpy as np
+
+# Define a transformation by where î and ĵ land
+i_lands = np.array([1, -2])   # î goes here
+j_lands = np.array([3,  0])   # ĵ goes here
+M = np.column_stack([i_lands, j_lands])   # columns = destinations
+
+# Apply transformation to a vector
+v = np.array([4, 3])
+result = M @ v                 # → [13, -8]
+
+# Same thing manually (linear combination formula):
+result_manual = v[0]*i_lands + v[1]*j_lands   # → [13, -8]
+
+# Common transformation matrices
+M_identity  = np.eye(2)
+M_rotate90  = np.array([[0, -1], [1, 0]])
+M_shear     = np.array([[1, 1], [0, 1]])
+M_scale2    = np.array([[2, 0], [0, 2]])
+M_reflect_x = np.array([[1, 0], [0, -1]])
+
+# Rotation by any angle θ
+theta = np.pi / 4   # 45 degrees
+M_rotate_theta = np.array([
+    [np.cos(theta), -np.sin(theta)],
+    [np.sin(theta),  np.cos(theta)]
+])
+
+# Test linearity: T(v+w) = T(v) + T(w)
+v = np.array([1.0, 2.0])
+w = np.array([3.0, -1.0])
+print(np.allclose(M_rotate90 @ (v+w), M_rotate90@v + M_rotate90@w))  # True ✓
+
+# Apply transform to multiple points (e.g. corners of a shape)
+square = np.array([[0,1,1,0], [0,0,1,1]], dtype=float)  # 2×4
+sheared_square = M_shear @ square   # transform all 4 corners at once
+</code></pre>
+<hr />
+<h2 id="quick-check">Quick Check ✅<a class="headerlink" href="#quick-check" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>What do a matrix's columns represent?</td>
+<td>Where the basis vectors î and ĵ land after the transformation. Column 1 = new î. Column 2 = new ĵ.</td>
+</tr>
+<tr>
+<td>Apply <code>[[2,0],[0,2]]</code> to <code>[3,1]</code>. Result?</td>
+<td><code>[6, 2]</code> — the scale-by-2 matrix doubles every component.</td>
+</tr>
+<tr>
+<td>What does <code>[[0,-1],[1,0]]</code> do to î = <code>[1,0]</code>?</td>
+<td>î lands at <code>[0, 1]</code> — straight up. Column 1 of the matrix is <code>[0,1]</code>.</td>
+</tr>
+<tr>
+<td>What transformation does the identity matrix represent?</td>
+<td>Nothing — every vector lands exactly where it started.</td>
+</tr>
+<tr>
+<td>Why can't <code>T(v) = v + [2,1]</code> be a matrix transformation?</td>
+<td>It moves the origin: <code>[0,0]</code> maps to <code>[2,1]</code>, not <code>[0,0]</code>. Matrix transformations must always keep the origin fixed.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="what-to-watch-next">What to watch next<a class="headerlink" href="#what-to-watch-next" title="Permanent link">&para;</a></h2>
+<p><strong>Chapter 4 — Matrix multiplication as composition.</strong>
+Two transformations applied one after the other can always be combined into a single matrix. This is the mathematical foundation of how neural network layers stack, and why <code>W3 · (W2 · (W1 · x))</code> can be collapsed into a single matrix product.</p>
+<hr />
+<p><em>Notes by following the <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">3Blue1Brown Essence of Linear Algebra</a> series.</em></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/venkatavikas69/linear-algebra-python" class="fa fa-code-fork" style="color: #fcfcfc"> venkatavikas69/linear-algebra-python</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
