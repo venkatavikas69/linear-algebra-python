@@ -6,7 +6,7 @@ This documentation site now includes the chapter notes directly as site pages.
 
 - [Chapter 1 - Vectors](chapter1_notes.md)
 - [Chapter 2 - Linear Combinations & Basis](chapter2_span_basis_notes.md)
-- [Chapter 3 - Linear Transformations][chapter3_linear_transformarions_notes.md]
+- [Chapter 3 - Linear Transformations](chapter3_linear_transformations_notes.md)
 
 ## Visualizations
 
@@ -22,4 +22,4 @@ This documentation site now includes the chapter notes directly as site pages.
 - `code/chapter2/linear_combinations_ch2.py`
 
 
-[docs/chapter3_linear_transformarions_notes.md]: chapter3_linear_transformarions_notes.md
+[docs/chapter3_linear_transformations_notes.md]: chapter3_linear_transformations_notes.md
