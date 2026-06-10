@@ -1,4 +1,5 @@
-### Below Conversation Summary is of Linear Algebra for AI (Chapters 1–3) to use it in another LLM when Claude tokens exhausts
+### Below Conversation Summary is of Linear Algebra for AI (Chapters 1–3) to use it in another LLM when Claude tokens are about to exhaust
+**Prompt:** `Give me a summary of what we have discussed until now. Make it LLM friendly and readable to me. I will use this in another LLM model.`
 # Conversation Summary — Linear Algebra for AI (Chapters 1–3)
 
 ## Context
